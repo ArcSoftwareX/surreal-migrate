@@ -1,0 +1,2 @@
+[workspace]
+members = ['surreal-migrate', 'migrator-lib']
