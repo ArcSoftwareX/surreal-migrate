@@ -90,7 +90,7 @@ fn get_migrations_up() -> anyhow::Result<Vec<(String, String)>> {
 
         let filename = entry.file_name().to_string_lossy().to_string();
 
-        if filename.ends_with(".up.sql") {
+        if filename.ends_with(".up.surql") {
             res.push((filename, content))
         }
     }
@@ -110,7 +110,7 @@ fn get_migrations_down() -> anyhow::Result<Vec<(String, String)>> {
 
         let filename = entry.file_name().to_string_lossy().to_string();
 
-        if filename.ends_with(".down.sql") {
+        if filename.ends_with(".down.surql") {
             res.push((filename, content))
         }
     }
@@ -136,7 +136,7 @@ async fn apply_migrations(
 fn create_migration(name: &String, is_up: bool) -> anyhow::Result<()> {
     let timestamp = get_current_timestamp();
     let filename = format!(
-        "./migrations/{}_{}.{}.sql",
+        "./migrations/{}_{}.{}.surql",
         timestamp,
         name,
         if is_up { "up" } else { "down" }
